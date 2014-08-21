@@ -11,8 +11,8 @@ Google Closure Integration for Javascript-based Metro Applications
 2. Add the Java executable to the PATH variable
 3. Install the [MetroClosure](http://www.nuget.org/packages/MetroClosure/) NuGet package to your project
 
-![](www.deepelement.com/img/articles/nuget-metroclosure/nuget-add.png)
+![](http://www.deepelement.com/img/articles/nuget-metroclosure/nuget-add.png)
 
-![](www.deepelement.com/img/articles/nuget-metroclosure/nuget-add-2.png)
+![](http://www.deepelement.com/img/articles/nuget-metroclosure/nuget-add-2.png)
 
 4. Build in RELEASE configuration
