@@ -35,19 +35,28 @@
 
 
 var onStart = function () {
-    var yo = window.document.getElementById('Main');
-    var start = new Date();
+    // Dispatch 
+    setTimeout(function () {
+        var outputContainer = window.document.getElementById('Main');
 
-    var dict = {};
-    for(var i=0; i<=5000; i++)
-        for (var m = 0; m <= 100; m++) {
-            dict[i.toString() + "-" + m.toString()] = i + m;
+        // Start timer
+        var start = new Date();
+
+        // Do some work that is not optimized
+        var dict = {};
+        for (var i = 0; i <= 5000; i++)
+            for (var m = 0; m <= 300; m++) {
+                dict[i.toString() + "-" + m.toString()] = i + m;
+            }
+        var total = 0;
+        for (var key in dict) {
+            total += dict[key];
         }
-    var total = 0;
-    for (var key in dict) {
-        total += dict[key];
-    }
 
-    var end = new Date();
-    yo.innerText = end.getTime() - start.getTime();
+        // Stop timer
+        var end = new Date();
+
+        // Output results to screen
+        outputContainer.innerText = end.getTime() - start.getTime() + "ms";
+    }, 0);
 }
