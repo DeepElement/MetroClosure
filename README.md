@@ -1,4 +1,4 @@
-MetroClosure 
+MetroClosure  - http://www.deepelement.com/article/nuget-metroclosure
 ==================
 
 Google Closure Integration for Javascript-based Metro Applications
@@ -16,3 +16,5 @@ Google Closure Integration for Javascript-based Metro Applications
 ![](http://www.deepelement.com/img/articles/nuget-metroclosure/nuget-add-2.png)
 
 4. Build in RELEASE configuration
+
+
