@@ -2,11 +2,14 @@
 <package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <id>MetroClosure</id>
-    <version>0.1</version>
+    <version>0.1.1</version>
     <authors>Todd Morrison</authors>
     <owners>Todd Morison</owners>
     <iconUrl>http://www.deepelement.com/img/logos/de/de_logo.ico</iconUrl>
     <description>Google Closure compilation for WinJS Metro Projects</description>
     <tags>Metro Closure GoogleClosure WinJS Javascript Compile MSBuild</tags>
+    <licenseUrl>https://raw.githubusercontent.com/DeepElement/metro-closure/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/DeepElement/metro-closure</projectUrl>
+    <copyright>Copyright 2014</copyright>
   </metadata>
 </package>
