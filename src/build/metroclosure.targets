@@ -3,22 +3,22 @@
   <PropertyGroup>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
-  <Target Name="CleanCacheRecords" >
+  <Target Name="CleanCacheRecordsMetroClosure" BeforeTargets="CleanCacheRecordsMetroClosure" >
     <ItemGroup>
       <CacheFiles Include="$(ProjectDir)\**\*.cache" />
     </ItemGroup>
     <Delete Files="@(CacheFiles)" />
   </Target>
 
-  <Target Name="CompileCacheRecords" DependsOnTargets="CleanCacheRecords">
+  <Target Name="CompileCacheRecords" BeforeTargets="_PackageExtraFilesMetroClosure">
     <ItemGroup>
       <JsFiles Include="$(ProjectDir)\**\*.js" Exclude="$(ProjectDir)\bin\**\*.*" />
-      <ClosureCompiler Include="$(SolutionDir)Packages$(PackagesDirectory)\MetroClosure.*\lib\win\GoogleClosure.*\*.jar" />
+      <ClosureCompiler Include="$(SolutionDir)Packages$(PackagesDirectory)\MetroClosure.*\lib\*.jar" />
     </ItemGroup>
     <Exec Condition="'$(Configuration)' == 'Release' " Command="java -jar @(ClosureCompiler) --language_in=ECMASCRIPT5 --js %(JsFiles.Identity) --js_output_file %(JsFiles.RootDir)%(JsFiles.Directory)%(JsFiles.Filename).js.cache" ContinueOnError="WarnAndContinue" />
   </Target>
 
-  <Target Name="_PackageExtraFiles" DependsOnTargets="CompileCacheRecords">
+  <Target Name="_PackageExtraFilesMetroClosure" BeforeTargets="PackageExtraFilesMetroClosure">
     <Message Text="PreCompilation-Files: %(PackagingOutputs.Identity)  TargetPath:%(PackagingOutputs.TargetPath)"  Importance="high" />
     <ItemGroup>
       <_AddToPackageFiles Include="$(ProjectDir)\**\*.cache" Exclude="$(ProjectDir)\bin\**\*.*" ></_AddToPackageFiles>
@@ -32,7 +32,7 @@
     </ItemGroup>
   </Target>
 
-  <Target Name="PackageExtraFiles" DependsOnTargets="_PackageExtraFiles" AfterTargets="GetPackagingOutputs">
+  <Target Name="PackageExtraFilesMetroClosure" AfterTargets="GetPackagingOutputs">
     <Message Text="PostCompilation-Files: %(PackagingOutputs.Identity)  TargetPath:%(PackagingOutputs.TargetPath)"  Importance="high" />
 
     <Message Text="Setting BOM header on JS Files" />
