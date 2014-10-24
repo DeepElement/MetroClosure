@@ -13,7 +13,7 @@
   <Target Name="CompileCacheRecords" DependsOnTargets="CleanCacheRecords">
     <ItemGroup>
       <JsFiles Include="$(ProjectDir)\**\*.js" Exclude="$(ProjectDir)\bin\**\*.*" />
-      <ClosureCompiler Include="$(ProjectDir)Packages$(PackagesDirectory)\MetroClosure.*\lib\win\GoogleClosure.*\*.jar" />
+      <ClosureCompiler Include="$(SolutionDir)Packages$(PackagesDirectory)\MetroClosure.*\lib\win\GoogleClosure.*\*.jar" />
     </ItemGroup>
     <Exec Condition="'$(Configuration)' == 'Release' " Command="java -jar @(ClosureCompiler) --language_in=ECMASCRIPT5 --js %(JsFiles.Identity) --js_output_file %(JsFiles.RootDir)%(JsFiles.Directory)%(JsFiles.Filename).js.cache" ContinueOnError="WarnAndContinue" />
   </Target>
