@@ -50,7 +50,7 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <PackageCertificateKeyFile>WindowsApp-SlowCode_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <NuGetPackageImportStamp>0864560e</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>aa475417</NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -70,15 +70,13 @@
     <SDKReference Include="Microsoft.WinJS.2.0, Version=1.0" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
-  <Import Project="packages\MetroClosure.0.1\build\win\metroclosure.targets" Condition="Exists('packages\MetroClosure.0.1\build\win\metroclosure.targets')" />
+  <Import Project="packages\MetroClosure.0.2.3\build\metroclosure.targets" Condition="Exists('packages\MetroClosure.0.2.3\build\metroclosure.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\MetroClosure.0.1\build\win\metroclosure.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MetroClosure.0.1\build\win\metroclosure.targets'))" />
-    <Error Condition="!Exists('packages\MetroClosure.0.1.1\build\win\metroclosure.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MetroClosure.0.1.1\build\win\metroclosure.targets'))" />
+    <Error Condition="!Exists('packages\MetroClosure.0.2.3\build\metroclosure.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MetroClosure.0.2.3\build\metroclosure.targets'))" />
   </Target>
-  <Import Project="packages\MetroClosure.0.1.1\build\win\metroclosure.targets" Condition="Exists('packages\MetroClosure.0.1.1\build\win\metroclosure.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment
        that target and the DisableFastUpToDateCheck PropertyGroup. 
        Other similar extension points exist, see Microsoft.Common.targets.

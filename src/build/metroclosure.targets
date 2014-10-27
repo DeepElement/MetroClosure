@@ -5,29 +5,29 @@
   </PropertyGroup>
   <Target Name="CleanCacheRecordsMetroClosure" BeforeTargets="CleanCacheRecordsMetroClosure" >
     <ItemGroup>
-      <CacheFiles Include="$(ProjectDir)\**\*.cache" />
+      <CacheFiles Include="$(ProjectDir)\**\*.metroclosure.cache" />
     </ItemGroup>
     <Delete Files="@(CacheFiles)" />
   </Target>
 
   <Target Name="CompileCacheRecords" BeforeTargets="_PackageExtraFilesMetroClosure">
     <ItemGroup>
-      <JsFiles Include="$(ProjectDir)\**\*.js" Exclude="$(ProjectDir)\bin\**\*.*" />
-      <ClosureCompiler Include="$(SolutionDir)Packages$(PackagesDirectory)\MetroClosure.*\lib\*.jar" />
+      <JsFiles Include="$(ProjectDir)\**\*.js" Exclude="$(ProjectDir)\bin\**\*.*;$(ProjectDir)\bld\**\*.*" />
+      <ClosureCompiler Include="$(SolutionDir)Packages\MetroClosure.*\tools\*.jar" />
     </ItemGroup>
-    <Exec Condition="'$(Configuration)' == 'Release' " Command="java -jar @(ClosureCompiler) --language_in=ECMASCRIPT5 --js %(JsFiles.Identity) --js_output_file %(JsFiles.RootDir)%(JsFiles.Directory)%(JsFiles.Filename).js.cache" ContinueOnError="WarnAndContinue" />
+    <Exec Condition="'$(Configuration)' == 'Release' " Command="java -jar @(ClosureCompiler) --language_in=ECMASCRIPT5 --js %(JsFiles.Identity) --js_output_file %(JsFiles.RootDir)%(JsFiles.Directory)%(JsFiles.Filename).js.metroclosure.cache" ContinueOnError="WarnAndContinue" />
   </Target>
 
   <Target Name="_PackageExtraFilesMetroClosure" BeforeTargets="PackageExtraFilesMetroClosure">
     <Message Text="PreCompilation-Files: %(PackagingOutputs.Identity)  TargetPath:%(PackagingOutputs.TargetPath)"  Importance="high" />
     <ItemGroup>
-      <_AddToPackageFiles Include="$(ProjectDir)\**\*.cache" Exclude="$(ProjectDir)\bin\**\*.*" ></_AddToPackageFiles>
-      <PackagingOutputs Remove="@(PackagingOutputs)" Condition="'%(Extension)'=='.cache'"></PackagingOutputs>
-      <PackagingOutputs Remove="@(PackagingOutputs)" Condition="'%(Extension)'=='.js' AND '$(Configuration)' == 'Release' AND Exists('%(RootDir)%(Directory)%(Filename).js.cache')"></PackagingOutputs>
+      <_AddToPackageFiles Include="$(ProjectDir)\**\*.metroclosure.cache" Exclude="$(ProjectDir)\bin\**\*.*;$(ProjectDir)\bld\**\*.*" ></_AddToPackageFiles>
+      <PackagingOutputs Remove="@(PackagingOutputs)" Condition="'%(Extension)'=='.js'"></PackagingOutputs>
+      <PackagingOutputs Remove="@(PackagingOutputs)" Condition="'%(Extension)'=='.js' AND '$(Configuration)' == 'Release' AND Exists('%(RootDir)%(Directory)%(Filename).js.metroclosure.cache')"></PackagingOutputs>
       <PackagingOutputs Include="@(_AddToPackageFiles -> '%(FullPath)')">
         <OutputGroup>Content</OutputGroup>
         <ProjectName>$(ProjectName)</ProjectName>
-        <TargetPath>%(RecursiveDir)%(Filename)</TargetPath>
+        <TargetPath>%(RecursiveDir)$([System.String]::Copy('%(Filename)').Replace('.metroclosure',''))</TargetPath>
       </PackagingOutputs>
     </ItemGroup>
   </Target>
